@@ -1,4 +1,72 @@
-parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcelRequire,u="function"==typeof require&&require;function f(t,n){if(!r[t]){if(!e[t]){var i="function"==typeof parcelRequire&&parcelRequire;if(!n&&i)return i(t,!0);if(o)return o(t,!0);if(u&&"string"==typeof t)return u(t);var c=new Error("Cannot find module '"+t+"'");throw c.code="MODULE_NOT_FOUND",c}p.resolve=function(r){return e[t][1][r]||r},p.cache={};var l=r[t]=new f.Module(t);e[t][0].call(l.exports,p,l,l.exports,this)}return r[t].exports;function p(e){return f(p.resolve(e))}}f.isParcelRequire=!0,f.Module=function(e){this.id=e,this.bundle=f,this.exports={}},f.modules=e,f.cache=r,f.parent=o,f.register=function(r,t){e[r]=[function(e,r){r.exports=t},{}]};for(var c=0;c<t.length;c++)try{f(t[c])}catch(e){i||(i=e)}if(t.length){var l=f(t[t.length-1]);"object"==typeof exports&&"undefined"!=typeof module?module.exports=l:"function"==typeof define&&define.amd?define(function(){return l}):n&&(this[n]=l)}if(parcelRequire=f,i)throw i;return f}({"QCba":[function(require,module,exports) {
-"use strict";var t;Object.defineProperty(exports,"__esModule",{value:!0}),function(t){var r=function(){function t(t){this.db={},this.db=t}return t.prototype.Register=function(t,r){try{this.db[t]=r}catch(e){console.error(e.message)}return this.Find(t)},t.prototype.Create=function(t,r){try{this.db[t].push(r)}catch(e){console.error(e.message)}return this.Find(t)},t.prototype.Update=function(t,r){var e=r.id,o=r;delete o.id;try{for(var i in this.db[t])if(this.db[t][i].id==e)for(var s in o)this.db[t][i][s]=o[s]}catch(n){console.error(n.message)}return this.Find(t)},t.prototype.Delete=function(t,r){var e=r.id;try{for(var o in this.db[t])this.db[t][o].id==e&&this.db[t].splice(o,1)}catch(i){console.error(i.message)}return this.Find(t)},t.prototype.Find=function(t){var r;try{r=this.db[t]}catch(e){console.error(e.message)}return r},t}();t.Open=r}(t=exports.jorm||(exports.jorm={}));
-},{}]},{},["QCba"], null)
-//# sourceMappingURL=/index.js.map
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var jorm;
+(function (jorm) {
+    class Open {
+        constructor(dbinit) {
+            this.db = {};
+            this.db = dbinit;
+        }
+        Register(recordsName, records) {
+            try {
+                this.db[recordsName] = records;
+            }
+            catch (error) {
+                console.error(error.message);
+            }
+            return this.Find(recordsName);
+        }
+        Create(recordsName, newRecord) {
+            try {
+                this.db[recordsName].push(newRecord);
+            }
+            catch (error) {
+                console.error(error.message);
+            }
+            return this.Find(recordsName);
+        }
+        Update(recordsName, targetRecord) {
+            const id = targetRecord.id;
+            let record = targetRecord;
+            delete record.id;
+            try {
+                for (const idb in this.db[recordsName]) {
+                    if (this.db[recordsName][idb].id != id)
+                        continue;
+                    for (const krec in record) {
+                        this.db[recordsName][idb][krec] = record[krec];
+                    }
+                }
+            }
+            catch (error) {
+                console.error(error.message);
+            }
+            return this.Find(recordsName);
+        }
+        Delete(recordsName, targetRecord) {
+            const id = targetRecord.id;
+            try {
+                for (const idb in this.db[recordsName]) {
+                    if (this.db[recordsName][idb].id != id)
+                        continue;
+                    this.db[recordsName].splice(idb, 1);
+                }
+            }
+            catch (error) {
+                console.error(error.message);
+            }
+            return this.Find(recordsName);
+        }
+        Find(recordsName) {
+            let records = [];
+            try {
+                records = this.db[recordsName];
+            }
+            catch (error) {
+                console.error(error.message);
+            }
+            return records;
+        }
+    }
+    jorm.Open = Open;
+})(jorm = exports.jorm || (exports.jorm = {}));

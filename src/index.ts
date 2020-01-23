@@ -3,7 +3,7 @@ import { Record, Records } from './type'
 export module jorm {
     export class Open {
         private db: any = {}
-        constructor(dbinit) {
+        constructor(dbinit: any) {
             this.db = dbinit
         }
 
@@ -62,7 +62,7 @@ export module jorm {
 
 
         public Find(recordsName: string): Records {
-            let records: Records
+            let records: Records = []
             try {
                 records = this.db[recordsName]
             } catch (error) {
