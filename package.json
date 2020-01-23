@@ -1,0 +1,21 @@
+{
+  "name": "@gqlkit/jorm",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx parcel build --target node src/index.ts"
+  },
+  "keywords": [],
+  "author": "inadati <dr.inadati@gmail.com> (https://github.com/gqlkit-repos)",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^3.7.5"
+  }
+}
