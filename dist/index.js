@@ -7,65 +7,65 @@ var jorm;
             this.db = {};
             this.db = dbinit;
         }
-        Regist(recordsName, records) {
+        Regist(collectionName, newCollection) {
             try {
-                this.db[recordsName] = records;
+                this.db[collectionName] = newCollection;
             }
             catch (error) {
                 console.error(error.message);
             }
-            return this.Find(recordsName);
+            return this.Find(collectionName);
         }
-        Create(recordsName, newRecord) {
+        Create(collectionName, newDoc) {
             try {
-                this.db[recordsName].push(newRecord);
+                this.db[collectionName].push(newDoc);
             }
             catch (error) {
                 console.error(error.message);
             }
-            return this.Find(recordsName);
+            return this.Find(collectionName);
         }
-        Update(recordsName, targetRecord) {
-            const id = targetRecord.id;
-            let record = targetRecord;
-            delete record.id;
+        Update(collectionName, targetDoc) {
+            const id = targetDoc.id;
+            let doc = targetDoc;
+            delete doc.id;
             try {
-                for (const idb in this.db[recordsName]) {
-                    if (this.db[recordsName][idb].id != id)
+                for (const idb in this.db[collectionName]) {
+                    if (this.db[collectionName][idb].id != id)
                         continue;
-                    for (const krec in record) {
-                        this.db[recordsName][idb][krec] = record[krec];
+                    for (const kdoc in doc) {
+                        this.db[collectionName][idb][kdoc] = doc[kdoc];
                     }
                 }
             }
             catch (error) {
                 console.error(error.message);
             }
-            return this.Find(recordsName);
+            return this.Find(collectionName);
         }
-        Delete(recordsName, targetRecord) {
-            const id = targetRecord.id;
+        Delete(collectionName, targetDoc) {
+            const id = targetDoc.id;
             try {
-                for (const idb in this.db[recordsName]) {
-                    if (this.db[recordsName][idb].id != id)
+                for (const idb in this.db[collectionName]) {
+                    if (this.db[collectionName][idb].id != id)
                         continue;
-                    this.db[recordsName].splice(idb, 1);
+                    this.db[collectionName].splice(idb, 1);
                 }
             }
             catch (error) {
                 console.error(error.message);
             }
-            return this.Find(recordsName);
+            return this.Find(collectionName);
         }
-        Find(recordsName) {
-            let records = [];
+        Find(collectionName) {
+            let collection = [];
             try {
-                records = this.db[recordsName];
+                collection = this.db[collectionName];
             }
             catch (error) {
                 console.error(error.message);
             }
-            return records;
+            return collection;
         }
     }
     jorm.Open = Open;

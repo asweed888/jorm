@@ -1,4 +1,4 @@
-export type Records = Record[]
+export type Collection = Doc[]
 
-export type Record = any
+export type Doc = any
 

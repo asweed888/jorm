@@ -1,4 +1,4 @@
-import { Record, Records } from './type'
+import { Doc, Collection } from './type'
 
 export module jorm {
     export class Open {
@@ -7,70 +7,67 @@ export module jorm {
             this.db = dbinit
         }
 
-        public Regist(recordsName: string, records: any): Records{
+        public Regist(collectionName: string, newCollection: any): Collection {
             try {
-                this.db[recordsName] = records
+                this.db[collectionName] = newCollection
             } catch (error) {
                 console.error(error.message)
             }
-            return this.Find(recordsName)
+            return this.Find(collectionName)
         }
 
-        public Create(recordsName: string, newRecord: Record): Records {
+        public Create(collectionName: string, newDoc: Doc): Collection {
             try {
-                this.db[recordsName].push(newRecord)
+                this.db[collectionName].push(newDoc)
             } catch (error) {
                 console.error(error.message)
             }
 
-            return this.Find(recordsName)
+            return this.Find(collectionName)
         }
 
-        public Update(recordsName: string, targetRecord: Record): Records {
-            const id = targetRecord.id
-            let record = targetRecord
-            delete record.id
+        public Update(collectionName: string, targetDoc: Doc): Collection {
+            const id = targetDoc.id
+            let doc = targetDoc
+            delete doc.id
 
             try {
-                for (const idb in this.db[recordsName]) {
-                    if (this.db[recordsName][idb].id != id) continue
-                    for (const krec in record) {
-                        this.db[recordsName][idb][krec] = record[krec]
+                for (const idb in this.db[collectionName]) {
+                    if (this.db[collectionName][idb].id != id) continue
+                    for (const kdoc in doc) {
+                        this.db[collectionName][idb][kdoc] = doc[kdoc]
                     }
                 }
             } catch (error) {
                 console.error(error.message)
             }
 
-            
-            return this.Find(recordsName)
+            return this.Find(collectionName)
         }
 
-        public Delete(recordsName: string, targetRecord: Record): Records{
-            const id = targetRecord.id
+        public Delete(collectionName: string, targetDoc: Doc): Collection {
+            const id = targetDoc.id
             try {
-                for (const idb in this.db[recordsName]) {
-                    if (this.db[recordsName][idb].id != id) continue
-                    this.db[recordsName].splice(idb, 1)
+                for (const idb in this.db[collectionName]) {
+                    if (this.db[collectionName][idb].id != id) continue
+                    this.db[collectionName].splice(idb, 1)
                 }
             } catch (error) {
                 console.error(error.message)
             }
 
-            return this.Find(recordsName)
+            return this.Find(collectionName)
         }
 
-
-        public Find(recordsName: string): Records {
-            let records: Records = []
+        public Find(collectionName: string): Collection {
+            let collection: Collection = []
             try {
-                records = this.db[recordsName]
+                collection = this.db[collectionName]
             } catch (error) {
                 console.error(error.message)
             }
 
-            return records
+            return collection
         }
-
     }
 }
