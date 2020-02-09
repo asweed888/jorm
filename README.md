@@ -43,7 +43,7 @@ gormには存在しているWhereなどは、現状キャッシュの書き込�
 variablesに必ずidが渡されることが想定される為、未実装です。  
 その為、GraphQLサーバーが提供するjsonデータのコレクションには、必ず`id`という名のフィールドが存在していなければなりません。
 
-* 表中の`Doc`など、独自の型については[こちら](https://github.com/gqlkit-lab/jorm/blob/master/src/type.ts)をご確認ください。
+ *表中の`Doc`など、独自の型については[こちら](https://github.com/gqlkit-lab/jorm/blob/master/src/type.ts)をご確認ください。
 
 | api | 概要 |
 |-----|-----|
