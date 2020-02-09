@@ -7,7 +7,7 @@ var jorm;
             this.db = {};
             this.db = dbinit;
         }
-        Register(recordsName, records) {
+        Regist(recordsName, records) {
             try {
                 this.db[recordsName] = records;
             }
