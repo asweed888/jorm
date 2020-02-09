@@ -36,11 +36,20 @@ export default cache
 
 ## Documentation
 jormは、gormを参考にgormと似たapiを提供しますが  
-javascriptのObjectの特性上、またはインメモリキャッシュへの読み書きという使用用途のみを想定しているので  
-現在のところ提供するapiは、下記一覧の通りとなります。
+javascriptのObjectの特性上の理由や  
+インメモリキャッシュへの読み書きという使用用途のみを想定しているという理由から  
+現在のところ、提供するapiは下記表の通りとなります。  
+gormには存在しているWhereなどは、現状キャッシュの書き込みの際、  
+variablesに必ずidが渡されることが想定される為、未実装です。  
+その為、GraphQLサーバーが提供するjsonデータのコレクションには、必ず`id`という名のフィールドが存在していなければなりません。
+
+* 表中の`Doc`など、独自の型については[こちら](https://github.com/gqlkit-lab/jorm/blob/master/src/type.ts)をご確認ください。
 
 | api | 概要 |
 |-----|-----|
-| Regist | 新規コレクション登録・初期化 |
-| Create | 新規ドキュメントを追加 |
+| cache.Regist(collectionName: string, newCollection: any) | コレクションの新規登録・初期化・オーバーライド |
+| cache.Create(collectionName: string, newDoc: Doc) | ドキュメントの新規追加 |
+| cache.Update(collectionName: string, targetDoc: Doc) | ドキュメントの更新(idによってドキュメントを特定) |
+| cache.Delete(collectionName: string, targetDoc: Doc) | ドキュメントの削除(idによってドキュメントを特定) |
+| cache.Find(collectionName: string) | コレクションの全件取得 |
 
