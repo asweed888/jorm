@@ -7,7 +7,7 @@ export module jorm {
             this.db = dbinit
         }
 
-        public Register(recordsName: string, records: any): Records{
+        public Regist(recordsName: string, records: any): Records{
             try {
                 this.db[recordsName] = records
             } catch (error) {
