@@ -1,5 +1,5 @@
 # JORM
-jormはgormに似せたapiで  
+jormはgormに似たapiで  
 javascriptのインメモリキャッシュへの読み書きができるapiです。  
   
  
@@ -41,15 +41,15 @@ javascriptのObjectの特性上の理由や
 現在のところ、提供するapiは下記表の通りとなります。  
 gormには存在しているWhereなどは、現状キャッシュの書き込みの際、  
 variablesに必ずidが渡されることが想定される為、未実装です。  
-その為、GraphQLサーバーが提供するjsonデータのコレクションには、必ず`id`という名のフィールドが存在していなければなりません。
+その為、GraphQLサーバーが提供するjsonデータのドキュメントには、必ず`id`という名のフィールドが存在していなければなりません。
 
  *表中の`Doc`など、独自の型については[こちら](https://github.com/gqlkit-lab/jorm/blob/master/src/type.ts)をご確認ください。
 
 | api | 概要 |
 |-----|-----|
-| cache.Regist(collectionName: string, newCollection: any) | コレクションの新規登録・初期化・オーバーライド |
+| cache.Regist(collectionName: string, newCollection: any) | コレクションの新規登録・初期化・上書き |
 | cache.Create(collectionName: string, newDoc: Doc) | ドキュメントの新規追加 |
 | cache.Update(collectionName: string, targetDoc: Doc) | ドキュメントの更新(idによってドキュメントを特定) |
 | cache.Delete(collectionName: string, targetDoc: Doc) | ドキュメントの削除(idによってドキュメントを特定) |
-| cache.Find(collectionName: string) | コレクションの全件取得 |
+| cache.Find(collectionName: string) | コレクションの取得(ドキュメント全件取得) |
 
