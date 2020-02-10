@@ -26,7 +26,7 @@ jormを利用する前準備は非常に簡単です。
 `export default cache`としてapiをexportしてやります。  
 実際にhttpResolverに組み込む例は  
 [こちら](https://github.com/gqlkit-lab/httpResolver/blob/master/resolvers/cache.js)をご覧ください。
-```
+```javascript
 import { jorm } from '@gqlkit/jorm'
 
 const cache = new jorm.Open({})
@@ -53,3 +53,35 @@ variablesに必ずidが渡されることが想定される為、未実装です
 | cache.Delete(collectionName: string, targetDoc: Doc) | ドキュメントの削除(idによってドキュメントを特定) |
 | cache.Find(collectionName: string) | コレクションの取得(ドキュメント全件取得) |
 
+## Example of use
+下記の例は[httpResolver](https://github.com/gqlkit-lab/httpResolver)での導入例です。  
+httpResolverのclient.jsのソースコードは、[こちら](https://github.com/gqlkit-lab/httpResolver/blob/master/resolvers/client.js)を確認してください。
+### cache.Regist(collectionName: string, newCollection: any): Collection
+```javascript
+import client from '../client'
+import cache from '../cache'
+import gql from 'graphql-tag'
+
+export const demand = gql`
+    query {
+        users {
+            id
+            name
+            age
+        }
+    }
+`
+
+// resolver
+export default async variables => {
+    // キャッシュにコレクションが未登録の場合、リモートデータを取得し、キャッシュにコレクションを追加する
+    if (!cache.Find("users")) {
+        const { users } = await client.req(demand)
+        
+        cache.Regist('users', users)
+    }
+
+    return cache.Find("users")
+}
+
+```
