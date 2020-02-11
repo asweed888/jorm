@@ -1,6 +1,9 @@
 # JORM
 jormはgormに似たapiで  
 javascriptのインメモリキャッシュへの読み書きができるapiです。  
+[httpResolver](https://github.com/gqlkit-lab/httpResolver)のclientによって  
+GraphQLサーバーから取得したデータをcacheへ書き込んだり、読み込んだり  
+といった用途で使用します。
   
  
 ## Installation
