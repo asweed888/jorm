@@ -47,7 +47,7 @@ variablesに必ずidが渡されることが想定される為、未実装です
 
 | api | 概要 |
 |-----|-----|
-| cache.Regist(collectionName: string, newCollection: any) | コレクションの新規登録・初期化・上書き |
+| cache.Regist(collectionName: string, newCollection: Doc[]) | コレクションの新規登録・初期化・上書き |
 | cache.Create(collectionName: string, newDoc: Doc) | ドキュメントの新規追加 |
 | cache.Update(collectionName: string, targetDoc: Doc) | ドキュメントの更新(idによってドキュメントを特定) |
 | cache.Delete(collectionName: string, targetDoc: Doc) | ドキュメントの削除(idによってドキュメントを特定) |
@@ -56,7 +56,7 @@ variablesに必ずidが渡されることが想定される為、未実装です
 ## Example of use
 下記の例は[httpResolver](https://github.com/gqlkit-lab/httpResolver)での導入例です。  
 httpResolverのclient.jsのソースコードは、[こちら](https://github.com/gqlkit-lab/httpResolver/blob/master/resolvers/client.js)を確認してください。
-### cache.Regist(collectionName: string, newCollection: any): Collection
+### cache.Regist(collectionName: string, newCollection: Doc[]): Collection
 ```javascript
 import client from '../client'
 import cache from '../cache'
@@ -84,4 +84,60 @@ export default async variables => {
     return cache.Find("users")
 }
 
+```
+
+### cache.Create(collectionName: string, newDoc: Doc): Collection
+```javascript
+import client from '../client'
+import cache from '../cache'
+import gql from 'graphql-tag'
+
+export const demand = gql`
+    mutation($name: String!, $age: Int!) {
+        createUser(name: $name, age: $age) {
+            id
+            name
+            age
+        }
+    }
+`
+
+// resolver
+export default async ({ name, age }) => {
+    const res = await client.req(demand, { name, age })
+    const user = res.createUser
+
+    return cache.Create('users', user)
+}
+
+```
+
+### cache.Update(collectionName: string, targetDoc: Doc): Collection
+ *jormでは、firebaseのfirestoreなどとは異なり、現状サブコレクションという概念は想定しません。  
+ですので、サブコレクションのフィールド毎の更新という処理は行わず、あくまでもサブコレクションは1フィールドという扱いで  
+更新の際は、全件上書きという対応で処理を行います。  
+これは、キャッシュに対する処理をできる限りシンプルにすることでキャッシュとサーバー側のDBとの差分発生などのトラブルを防ぐ為です。  
+キャッシュは、あくまでも仮のDBであり、複雑な処理は出来る限り排除すべきです。
+```javascript
+import client from '../client'
+import cache from '../cache'
+import gql from 'graphql-tag'
+
+export const demand = gql`
+    mutation($id: ID! $name: String!, $age: Int!) {
+        updateUser(id: $id, name: $name, age: $age) {
+            id
+            name
+            age
+        }
+    }
+`
+
+// resolver
+export default async ({ id, name, age }) => {
+    const res = await client.req(demand, { id, name, age })
+    const user = res.updateUser
+
+    return cache.Update('users', user)
+}
 ```
