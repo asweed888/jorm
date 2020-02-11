@@ -69,5 +69,9 @@ export module jorm {
 
             return collection
         }
+
+        public Show(): void {
+            console.dir(this.db)
+        }
     }
 }

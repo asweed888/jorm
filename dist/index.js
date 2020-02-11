@@ -67,6 +67,9 @@ var jorm;
             }
             return collection;
         }
+        Show() {
+            console.dir(this.db);
+        }
     }
     jorm.Open = Open;
 })(jorm = exports.jorm || (exports.jorm = {}));
