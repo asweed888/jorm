@@ -141,3 +141,27 @@ export default async ({ id, name, age }) => {
     return cache.Update('users', user)
 }
 ```
+
+### cache.Delete(collectionName: string, targetDoc: Doc): Collection
+```javascript
+import client from '../client'
+import cache from '../cache'
+import gql from 'graphql-tag'
+
+export const demand = gql`
+    mutation($id: ID!) {
+        deleteUser(id: $id) {
+            id
+        }
+    }
+`
+
+// resolver
+export default async ({ id }) => {
+    const res = await client.req(demand, { id })
+    const user = res.deleteUser
+
+    return cache.Delete('users', user)
+}
+
+```
