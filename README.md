@@ -55,6 +55,7 @@ variablesに必ずidが渡されることが想定される為、未実装です
 | [Update](https://github.com/gqlkit-lab/jorm/blob/master/README.md#updatecollectionname-string-targetdoc-doc-collection) | ドキュメントの更新(idによってドキュメントを特定) |
 | [Delete](https://github.com/gqlkit-lab/jorm/blob/master/README.md#deletecollectionname-string-targetdoc-doc-collection) | ドキュメントの削除(idによってドキュメントを特定) |
 | Find | コレクションの取得(ドキュメント全件取得) |
+| Show | cache全体の状態をコンソールへ出力 |
 
 ## Example of use
 下記の例は[httpResolver](https://github.com/gqlkit-lab/httpResolver)での導入例です。  
