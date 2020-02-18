@@ -14,7 +14,7 @@ npm i @gqlkit/client
 ```
 `@gqlkit/client`パッケージには下記のパッケージが含まれています。  
 `@gqlkit/client`をインストールするだけでGraphQLクライアントに必要な最低限のパッケージは揃います。  
-また、jormでは不十分な場合、`lowdb`や`lokijs`を使用することもできます。  
+また、jormでは不十分な場合、`@gqlkit/client`には`lowdb`や`lokijs`も含まれていますのでそれらを使用することもできます。  
 お好みのキャッシュDBをお使いください。  
 - @gqlkit/jorm
 - graphql
@@ -27,7 +27,7 @@ npm i @gqlkit/client
 jormを利用する前準備は非常に簡単です。  
 `cache.js`などのファイル名で下記の3行の記述で前準備は完了です。  
 `export default cache`としてapiをexportしてやります。  
-実際にhttpResolverに組み込む例は  
+実際に[Resolved API](https://github.com/gqlkit-lab/rapi)に組み込む例は  
 [こちら](https://github.com/gqlkit-lab/rapi/blob/master/resolvers/cache.js)をご覧ください。
 ```javascript
 import { jorm } from '@gqlkit/jorm'
@@ -58,8 +58,8 @@ variablesに必ずidが渡されることが想定される為、未実装です
 | Show | cache全体の状態をコンソールへ出力 |
 
 ## Example of use
-下記の例は[rapi](https://github.com/gqlkit-lab/rapi)での導入例です。  
-rapiのclient.jsのソースコードは、[こちら](https://github.com/gqlkit-lab/rapi/blob/master/resolvers/client.js)を確認してください。
+下記の例は[Resolved API](https://github.com/gqlkit-lab/rapi)での導入例です。  
+`Resolved API`のclient.jsのソースコードは、[こちら](https://github.com/gqlkit-lab/rapi/blob/master/resolvers/client.js)を確認してください。
 ### Regist(collectionName: string, newCollection: Doc[]): Collection
 ```javascript
 import client from '../client'
