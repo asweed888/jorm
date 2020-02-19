@@ -32,10 +32,10 @@ export module jorm {
             delete doc.id
 
             try {
-                for (const idb in this.db[collectionName]) {
-                    if (this.db[collectionName][idb].id != id) continue
-                    for (const kdoc in doc) {
-                        this.db[collectionName][idb][kdoc] = doc[kdoc]
+                for (const i in this.db[collectionName]) {
+                    if (this.db[collectionName][i].id != id) continue
+                    for (const docKey in doc) {
+                        this.db[collectionName][i][docKey] = doc[docKey]
                     }
                 }
             } catch (error) {
@@ -46,11 +46,10 @@ export module jorm {
         }
 
         public Delete(collectionName: string, targetDoc: Doc): Collection {
-            const id = targetDoc.id
             try {
-                for (const idb in this.db[collectionName]) {
-                    if (this.db[collectionName][idb].id != id) continue
-                    this.db[collectionName].splice(idb, 1)
+                for (const i in this.db[collectionName]) {
+                    if (this.db[collectionName][i].id != targetDoc.id) continue
+                    this.db[collectionName].splice(i, 1)
                 }
             } catch (error) {
                 console.error(error.message)
@@ -59,10 +58,23 @@ export module jorm {
             return this.Find(collectionName)
         }
 
-        public Find(collectionName: string): Collection {
+        public Find(collectionName: string, targetDoc:Doc = null): Collection {
             let collection: Collection = []
             try {
-                collection = this.db[collectionName]
+                if (targetDoc){
+                    for (const i in this.db[collectionName]) {
+                        if (this.db[collectionName][i].id != targetDoc.id) {
+                            continue
+                        }
+                        else{
+                            collection.push(this.db[collectionName][i])
+                            break
+                        }
+                    }
+                }
+                else{
+                    collection = this.db[collectionName]
+                }
             } catch (error) {
                 console.error(error.message)
             }

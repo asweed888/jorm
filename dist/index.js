@@ -30,11 +30,11 @@ var jorm;
             let doc = targetDoc;
             delete doc.id;
             try {
-                for (const idb in this.db[collectionName]) {
-                    if (this.db[collectionName][idb].id != id)
+                for (const i in this.db[collectionName]) {
+                    if (this.db[collectionName][i].id != id)
                         continue;
-                    for (const kdoc in doc) {
-                        this.db[collectionName][idb][kdoc] = doc[kdoc];
+                    for (const docKey in doc) {
+                        this.db[collectionName][i][docKey] = doc[docKey];
                     }
                 }
             }
@@ -44,12 +44,11 @@ var jorm;
             return this.Find(collectionName);
         }
         Delete(collectionName, targetDoc) {
-            const id = targetDoc.id;
             try {
-                for (const idb in this.db[collectionName]) {
-                    if (this.db[collectionName][idb].id != id)
+                for (const i in this.db[collectionName]) {
+                    if (this.db[collectionName][i].id != targetDoc.id)
                         continue;
-                    this.db[collectionName].splice(idb, 1);
+                    this.db[collectionName].splice(i, 1);
                 }
             }
             catch (error) {
@@ -57,10 +56,23 @@ var jorm;
             }
             return this.Find(collectionName);
         }
-        Find(collectionName) {
+        Find(collectionName, targetDoc = null) {
             let collection = [];
             try {
-                collection = this.db[collectionName];
+                if (targetDoc) {
+                    for (const i in this.db[collectionName]) {
+                        if (this.db[collectionName][i].id != targetDoc.id) {
+                            continue;
+                        }
+                        else {
+                            collection.push(this.db[collectionName][i]);
+                            break;
+                        }
+                    }
+                }
+                else {
+                    collection = this.db[collectionName];
+                }
             }
             catch (error) {
                 console.error(error.message);
