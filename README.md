@@ -1,7 +1,7 @@
 # JORM
 jormはgormに似たapiで  
 javascriptのインメモリキャッシュへの読み書きができるapiです。  
-[httpResolver](https://github.com/gqlkit-lab/httpResolver)のclientによって  
+[Resolved API](https://github.com/gqlkit-lab/rapi)のclientによって  
 GraphQLサーバーから取得したデータをcacheへ書き込んだり、読み込んだり  
 といった用途で使用します。
   
@@ -14,7 +14,7 @@ npm i @gqlkit/client
 ```
 `@gqlkit/client`パッケージには下記のパッケージが含まれています。  
 `@gqlkit/client`をインストールするだけでGraphQLクライアントに必要な最低限のパッケージは揃います。  
-また、jormでは不十分な場合、`lowdb`や`lokijs`を使用することもできます。  
+また、jormでは不十分な場合、`@gqlkit/client`には`lowdb`や`lokijs`も含まれていますのでそれらを使用することもできます。  
 お好みのキャッシュDBをお使いください。  
 - @gqlkit/jorm
 - graphql
@@ -27,8 +27,8 @@ npm i @gqlkit/client
 jormを利用する前準備は非常に簡単です。  
 `cache.js`などのファイル名で下記の3行の記述で前準備は完了です。  
 `export default cache`としてapiをexportしてやります。  
-実際にhttpResolverに組み込む例は  
-[こちら](https://github.com/gqlkit-lab/httpResolver/blob/master/resolvers/cache.js)をご覧ください。
+実際に[Resolved API](https://github.com/gqlkit-lab/rapi)に組み込む例は  
+[こちら](https://github.com/gqlkit-lab/rapi/blob/master/resolvers/cache.js)をご覧ください。
 ```javascript
 import { jorm } from '@gqlkit/jorm'
 
@@ -41,7 +41,7 @@ export default cache
 jormは、gormを参考にgormと似たapiを提供しますが  
 javascriptのObjectの特性上の理由や  
 インメモリキャッシュへの読み書きという使用用途のみを想定しているという理由から  
-現在のところ、提供するapiは下記表の5つのみとなります。  
+現在のところ、提供するapiは下記表の6つのみとなります。  
 gormには存在しているWhereなどは、現状キャッシュの書き込みの際、  
 variablesに必ずidが渡されることが想定される為、未実装です。  
 その為、GraphQLサーバーが提供するjsonデータのドキュメントには、必ず`id`という名のフィールドが存在していなければなりません。
@@ -55,10 +55,11 @@ variablesに必ずidが渡されることが想定される為、未実装です
 | [Update](https://github.com/gqlkit-lab/jorm/blob/master/README.md#updatecollectionname-string-targetdoc-doc-collection) | ドキュメントの更新(idによってドキュメントを特定) |
 | [Delete](https://github.com/gqlkit-lab/jorm/blob/master/README.md#deletecollectionname-string-targetdoc-doc-collection) | ドキュメントの削除(idによってドキュメントを特定) |
 | Find | コレクションの取得(ドキュメント全件取得) |
+| Show | cache全体の状態をコンソールへ出力 |
 
 ## Example of use
-下記の例は[httpResolver](https://github.com/gqlkit-lab/httpResolver)での導入例です。  
-httpResolverのclient.jsのソースコードは、[こちら](https://github.com/gqlkit-lab/httpResolver/blob/master/resolvers/client.js)を確認してください。
+下記の例は[Resolved API](https://github.com/gqlkit-lab/rapi)での導入例です。  
+`Resolved API`のclient.jsのソースコードは、[こちら](https://github.com/gqlkit-lab/rapi/blob/master/resolvers/client.js)を確認してください。
 ### Regist(collectionName: string, newCollection: Doc[]): Collection
 ```javascript
 import client from '../client'
