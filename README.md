@@ -54,7 +54,7 @@ variablesに必ずidが渡されることが想定される為、未実装です
 | [Create](https://github.com/gqlkit-lab/jorm/blob/master/README.md#createcollectionname-string-newdoc-doc-collection) | ドキュメントの新規追加 |
 | [Update](https://github.com/gqlkit-lab/jorm/blob/master/README.md#updatecollectionname-string-targetdoc-doc-collection) | ドキュメントの更新(idによってドキュメントを特定) |
 | [Delete](https://github.com/gqlkit-lab/jorm/blob/master/README.md#deletecollectionname-string-targetdoc-doc-collection) | ドキュメントの削除(idによってドキュメントを特定) |
-| [Find]((https://github.com/gqlkit-lab/jorm/blob/master/README.md#findcollectionname-string-targetdoc-doc-collection)) | コレクションの取得 |
+| [Find](https://github.com/gqlkit-lab/jorm/blob/master/README.md#findcollectionname-string-targetdoc-doc--null-collection) | コレクションの取得 |
 | Show | cache全体の状態をコンソールへ出力 |
 
 ## Example of use
