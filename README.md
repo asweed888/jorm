@@ -1,6 +1,6 @@
 # JORM
 jormはgormに似たapiで  
-javascriptのインメモリキャッシュへの読み書きができるapiです。  
+javascriptのインメモリキャッシュへの読み書きができるcache ORMです。  
 [Resolved API](https://github.com/gqlkit-lab/rapi)のclientによって  
 GraphQLサーバーから取得したデータをcacheへ書き込んだり、読み込んだり  
 といった用途で使用します。
