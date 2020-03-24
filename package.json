@@ -15,6 +15,6 @@
   "author": "inadati <dr.inadati@gmail.com> (https://github.com/gqlkit-repos)",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^3.7.5"
+    "typescript": "^3.8.3"
   }
 }
