@@ -1,6 +1,6 @@
 # JORM
 jormはgormに似たapiで  
-javascriptのインメモリキャッシュへの読み書きができるapiです。  
+javascriptのインメモリキャッシュへの読み書きができるcache ORMです。  
 [Resolved API](https://github.com/gqlkit-lab/rapi)のclientによって  
 GraphQLサーバーから取得したデータをcacheへ書き込んだり、読み込んだり  
 といった用途で使用します。
@@ -54,7 +54,7 @@ variablesに必ずidが渡されることが想定される為、未実装です
 | [Create](https://github.com/gqlkit-lab/jorm/blob/master/README.md#createcollectionname-string-newdoc-doc-collection) | ドキュメントの新規追加 |
 | [Update](https://github.com/gqlkit-lab/jorm/blob/master/README.md#updatecollectionname-string-targetdoc-doc-collection) | ドキュメントの更新(idによってドキュメントを特定) |
 | [Delete](https://github.com/gqlkit-lab/jorm/blob/master/README.md#deletecollectionname-string-targetdoc-doc-collection) | ドキュメントの削除(idによってドキュメントを特定) |
-| Find | コレクションの取得(ドキュメント全件取得) |
+| [Find](https://github.com/gqlkit-lab/jorm/blob/master/README.md#findcollectionname-string-targetdoc-doc--null-collection) | コレクションの取得 |
 | Show | cache全体の状態をコンソールへ出力 |
 
 ## Example of use
@@ -168,4 +168,15 @@ export default async ({ id }) => {
     return cache.Delete('users', user)
 }
 
+```
+
+### Find(collectionName: string, targetDoc: Doc = null): Collection
+キャッシュから指定したコレクション名のコレクションを取得します。
+targetDocを指定するとidによる一件取得も可能です。
+targetDocが指定されていない場合は全件取得になります。
+```javascript
+// 全件取得
+const users = cache.Find('users')
+// 一件取得
+const [ user ] = cache.Find('users', {id})
 ```
