@@ -16,9 +16,17 @@ var jorm;
             }
             return this.Find(collectionName);
         }
-        Create(collectionName, newDoc) {
+        Create(collectionName, newDoc, addPosition = 'end') {
             try {
-                this.db[collectionName].push(newDoc);
+                if (addPosition == 'end') {
+                    this.db[collectionName].push(newDoc);
+                }
+                else if (addPosition == 'start') {
+                    this.db[collectionName].unshift(newDoc);
+                }
+                else if (typeof addPosition == 'number') {
+                    this.db[collectionName].splice(addPosition, 0, newDoc);
+                }
             }
             catch (error) {
                 console.error(error.message);
