@@ -35,7 +35,8 @@ var jorm;
         }
         Update(collectionName, targetDoc) {
             const id = targetDoc.id;
-            let doc = targetDoc;
+            const doc_json = JSON.stringify(targetDoc);
+            const doc = JSON.parse(doc_json);
             delete doc.id;
             try {
                 for (const i in this.db[collectionName]) {
