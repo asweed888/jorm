@@ -2,13 +2,13 @@
   "name": "@gqlkit/jorm",
   "version": "0.4.1",
   "description": "",
-  "main": "dist/index.js",
+  "main": "index.js",
   "private": false,
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "test": "node dist/test.js",
+    "test": "node test.js",
     "build": "npx tsc"
   },
   "keywords": [],
