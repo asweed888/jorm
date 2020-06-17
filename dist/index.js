@@ -94,3 +94,4 @@ var jorm;
     }
     jorm.Open = Open;
 })(jorm = exports.jorm || (exports.jorm = {}));
+exports.default = new jorm.Open({});

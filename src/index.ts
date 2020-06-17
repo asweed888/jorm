@@ -94,3 +94,5 @@ export module jorm {
         }
     }
 }
+
+export default new jorm.Open({})
