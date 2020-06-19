@@ -89,8 +89,8 @@ export module jorm {
             return collection
         }
 
-        public Show(): void {
-            console.dir(this.db)
+        public Clear(): void {
+            this.db = {}
         }
     }
 }

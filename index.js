@@ -88,8 +88,8 @@ var jorm;
             }
             return collection;
         }
-        Show() {
-            console.dir(this.db);
+        Clear() {
+            this.db = {};
         }
     }
     jorm.Open = Open;
